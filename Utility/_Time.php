@@ -4,13 +4,8 @@ namespace Ephp\UtilityBundle\Utility;
 
 class _Time {
 
-    public static function time($label, $start, $continue = true) {
-        $end = microtime(true);
-        $time = $end - $start;
-        echo "<pre><b>{$label}</b>: {$time} secondi</pre>\n";
-        if (!$continue)
-            exit;
-        return $end;
+    public static function datetimeFromBirthday($data) {
+        return \DateTime::createFromFormat('d/m/Y', "{$data['day']}/{$data['month']}/{$data['year']}");
     }
 
     public static function calcolaData(\DateTime $data, $giorni, $posticipa = false, $days = array(1, 2, 3, 4, 5)) {

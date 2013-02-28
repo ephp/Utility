@@ -58,5 +58,14 @@ class _Debug {
         echo '<pre>'.(gettype($s) == 'object' ? 'Classe: ' . get_class($s) : 'Tipo: ' . gettype($s)).'<pre>';
         self::vd($s, $continue);
     }
+    
+    public static function time($label, $start, $continue = true) {
+        $end = microtime(true);
+        $time = $end - $start;
+        echo "<pre><b>{$label}</b>: {$time} secondi</pre>\n";
+        if (!$continue)
+            exit;
+        return $end;
+    }
 
 }
