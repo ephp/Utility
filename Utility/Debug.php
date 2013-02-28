@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _Debug {
+class Debug {
     
     public static function json($o, $continue = true) {
         $json = json_encode($o);

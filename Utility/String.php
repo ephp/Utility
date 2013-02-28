@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _String {
+class String {
 
     public static function alfabeto() {
         return array(

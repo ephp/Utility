@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _Geo {
+class Geo {
 
     const TERRA = 6372.795477598;
 

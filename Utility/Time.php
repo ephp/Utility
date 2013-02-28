@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _Time {
+class Time {
 
     public static function datetimeFromBirthday($data) {
         return \DateTime::createFromFormat('d/m/Y', "{$data['day']}/{$data['month']}/{$data['year']}");

@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _Log {
+class Log {
 
     public static $STRING = 0;
     public static $PR = 1;
