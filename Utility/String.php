@@ -15,6 +15,10 @@ class String {
         );
     }
 
+    public static function currency($euro) {
+        return str_replace(array('€', '.', ',', ' '), array('', '', '.', ''), $euro);
+    }
+
     public static function tronca($testo, $lunghezza, $space = true) {
         $testo = str_replace('  ', ' ', strip_tags(str_replace('<', ' <', $testo)));
         if (strlen($testo) <= $lunghezza) {
