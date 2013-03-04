@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _Debug {
+class Debug {
     
     public static function json($o, $continue = true) {
         $json = json_encode($o);
@@ -57,6 +57,15 @@ class _Debug {
     public static function infoVd($s, $continue = false) {
         echo '<pre>'.(gettype($s) == 'object' ? 'Classe: ' . get_class($s) : 'Tipo: ' . gettype($s)).'<pre>';
         self::vd($s, $continue);
+    }
+
+    public static function time($label, $start, $continue = true) {
+        $end = microtime(true);
+        $time = $end - $start;
+        echo "<pre><b>{$label}</b>: {$time} secondi</pre>\n";
+        if (!$continue)
+            exit;
+        return $end;
     }
 
 }

@@ -2,8 +2,13 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _String {
+class String {
 
+    /**
+     * Restituisce un array contenente l'alfabeto
+     * 
+     * @return array
+     */
     public static function alfabeto() {
         return array(
             'A', 'B', 'C', 'D', 'E',
@@ -77,4 +82,28 @@ class _String {
         return $frase;
     }
     
+    /**
+     * Trasforma una stringa, una data in un codice di 8 caratteri
+     * 
+     * @param type $obj
+     * @return string
+     */
+    public static function ep8($obj) {
+        if($obj instanceof \DateTime) {
+            $str = $obj->getTimestamp();
+        } else if($obj instanceof \Ephp\UtilityBundle\Interfaces\EP8) {
+            /* @var $obj \Ephp\UtilityBundle\Interfaces\EP8 */
+            $str = $obj->ep8String();
+        } else {
+            $str = 'ep8 '.$obj;
+        }
+        $str = md5($str).sha1($str);
+        $n = 0;
+        for($i = 0; $i < strlen($str); $i++) {
+            $n += ord($str{$i}) * (1 + $i % 10);
+        }
+        $n = dechex($ts).'';
+        return str_repeat('0', 8-strlen($n)).$n;
+    }
+
 }

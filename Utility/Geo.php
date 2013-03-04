@@ -2,14 +2,36 @@
 
 namespace Ephp\UtilityBundle\Utility;
 
-class _Geo {
+class Geo {
 
+    /**
+     * raggio medio della terra espresso in km
+     */
     const TERRA = 6372.795477598;
 
+    /**
+     * Costruisce una static map di google
+     * 
+     * @param type $lat latitudine
+     * @param type $lon longitudiine
+     * @param type $x larghezza in pixel
+     * @param type $y altezza in pixel
+     * @param type $zoom zoom della mappa
+     * @param type $color colore del segnalino
+     * @param type $type tipo della mappa (roadmap, ...)
+     * @return type
+     */
     public static function staticMap($lat, $lon, $x, $y, $zoom, $color = '337FC5', $type = 'roadmap') {
         return "http://maps.google.com/maps/api/staticmap?center={$lat},{$lon}&zoom={$zoom}&size={$x}x{$y}&maptype={$type}&sensor=true&markers=color:0x{$color}|{$lat},{$lon}&markers=size:tiny";
     }
 
+    /**
+     * Calcola la distanza in km fra due punti geolocalizzati espressi in radianti
+     * 
+     * @param array $da array contenente (lat, lon)
+     * @param array $a array contenente (lat, lon)
+     * @return float distanza in km
+     */
     public static function getDistanzaRad($da, $a) {
         $da['lat'] = floatval($da['lat']);
         $da['lon'] = floatval($da['lon']);
@@ -29,7 +51,14 @@ class _Geo {
                         )
                 ) * self::TERRA;
     }
-
+    
+    /**
+     * Calcola la distanza in km fra due punti geolocalizzati espressi in gradi
+     * 
+     * @param array $da array contenente (lat, lon)
+     * @param array $a array contenente (lat, lon)
+     * @return float distanza in km
+     */
     public static function getDistanza($da, $a) {
         return (
                 acos(
@@ -52,6 +81,12 @@ class _Geo {
                 ) * 6372.795477598;
     }
 
+    /**
+     * Formatta mettendo l'unità di misura più adatta per una distanza
+     * 
+     * @param type $distanza
+     * @return string
+     */
     public static function km($distanza) {
         $distanza = floatval($distanza);
         if ($distanza < 0) {
