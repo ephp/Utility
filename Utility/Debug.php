@@ -68,13 +68,4 @@ class Debug {
         return $end;
     }
 
-    public static function time($label, $start, $continue = true) {
-        $end = microtime(true);
-        $time = $end - $start;
-        echo "<pre><b>{$label}</b>: {$time} secondi</pre>\n";
-        if (!$continue)
-            exit;
-        return $end;
-    }
-
 }
