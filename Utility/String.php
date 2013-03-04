@@ -93,7 +93,14 @@ class String {
      * @return string
      */
     public static function ep8($obj) {
-        if($obj instanceof \DateTime) {
+        if(is_array($obj)) {
+            $out = array();
+            foreach ($obj as $o) {
+                $out[] = self::ep8($o);
+            }
+            return implode('-', $out);
+        } else if($obj instanceof \DateTime) {
+            /* @var $obj \DateTime */
             $str = $obj->getTimestamp();
         } else if($obj instanceof \Ephp\UtilityBundle\Interfaces\EP8) {
             /* @var $obj \Ephp\UtilityBundle\Interfaces\EP8 */
