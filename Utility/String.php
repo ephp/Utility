@@ -20,8 +20,8 @@ class String {
         );
     }
 
-    public static function currency($euro) {
-        return str_replace(array('€', '.', ',', ' '), array('', '', '.', ''), $euro);
+    public static function currency($euro, $migliaia = '.', $decimali = ',') {
+        return str_replace(array('€', $migliaia, $decimali, ' '), array('', '', '.', ''), $euro);
     }
 
     public static function tronca($testo, $lunghezza, $space = true) {
