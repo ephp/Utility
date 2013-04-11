@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+Gestione SEO
+{% endblock %}
+
+{% block content %}
+<h1>Modifica SEO personalizzato</h1>
+<div style="width: 50%; float:left;">
+    <form action="{{ path('admin_seo_update', { 'id': seo.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>
+            <button type="submit">Salva</button>
+        </p>
+    </form>
+</div>
+<div style="width: 50%; float:left;" id="help">
+    {% include 'EphpUtilityBundle:Seo:help.html.twig' %}
+</div>
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_seo') }}">
+            Torna indietro
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_seo_delete', { 'id': seo.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Elimina</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

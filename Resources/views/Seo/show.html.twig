@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+EcoSeekr - Gestione SEO
+{% endblock %}
+
+{% block content %}
+<h1>Dettagli SEO pesonalizzato</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Entity_class</th>
+            <td>{{ entity.entityclass }}</td>
+        </tr>
+        <tr>
+            <th>Entity_name</th>
+            <td>{{ entity.entityname }}</td>
+        </tr>
+        <tr>
+            <th>Description_base</th>
+            <td>{{ entity.descriptionbase }}</td>
+        </tr>
+        <tr>
+            <th>Keywords_fields</th>
+            <td>{{ entity.keywordsfields }}</td>
+        </tr>
+        <tr>
+            <th>Keywords_min_length</th>
+            <td>{{ entity.keywordsminlength }}</td>
+        </tr>
+        <tr>
+            <th>Keywords_max_length</th>
+            <td>{{ entity.keywordsmaxlength }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_seo') }}">
+            Torna indietro
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_seo_edit', { 'id': entity.id }) }}">
+            Modifica
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_seo_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Elimina</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}
