@@ -54,4 +54,15 @@ trait BaseController {
         return $this->getRepository($classe)->findOneBy($find, $order);
     }
     
+    protected function getParam($name, $default = null) {
+        $out = $this->getRequest()->get($name, null);
+        if($out === null) {
+            if($default instanceof \Exception) {
+                throw $default;
+            }
+            $out = $default;
+        }
+        return $out;
+    }
+    
 }
