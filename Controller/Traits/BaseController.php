@@ -65,4 +65,18 @@ trait BaseController {
         return $out;
     }
     
+    protected function hasRole($role) {
+        $user = $this->getUser();
+        return $user->hasRole($role);
+    }
+    
+    protected function inRole($roles) {
+        $user = $this->getUser();
+        $out = false;
+        foreach($roles as $role) {
+            $out != $user->hasRole($role);
+        }
+        return $out;
+    }
+    
 }
