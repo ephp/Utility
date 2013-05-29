@@ -11,10 +11,10 @@ class SeoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('entity_class')
-            ->add('entity_name')
-            ->add('description_base')
-            ->add('keywords_fields')
+            ->add('entity_class', null, array('attr' => array('style' => 'width: 300px')))
+            ->add('entity_name', null, array('attr' => array('style' => 'width: 300px')))
+            ->add('description_base', null, array('attr' => array('style' => 'width: 300px; height: 150px')))
+            ->add('keywords_fields', null, array('attr' => array('style' => 'width: 300px; height: 150px')))
             ->add('keywords_min_length')
             ->add('keywords_max_length')
         ;

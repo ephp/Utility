@@ -67,5 +67,14 @@ class Debug {
             exit;
         return $end;
     }
-
+    
+    public static function memory($punto, $max = 250) {
+        $mem_usage = memory_get_usage(true); 
+        if($mem_usage/1048576 > $max) {
+            throw new \Exception("Superati {$max}Mb nel punto {$punto}");
+        } else {
+            echo ($mem_usage/1048576)."Mb nel punto {$punto}\n";
+        }
+    }
+    
 }
