@@ -8,7 +8,7 @@ trait BaseController {
      * @return \Doctrine\ORM\EntityManager 
      */
     protected function getEm() {
-        return $this->getDoctrine()->getEntityManager();
+        return $this->getDoctrine()->getManager();
     }
     
     /**
