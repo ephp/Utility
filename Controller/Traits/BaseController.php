@@ -54,6 +54,26 @@ trait BaseController {
         return $this->getRepository($classe)->findOneBy($find, $order);
     }
     
+    /**
+     * Restituisce il repository richiesto
+     * 
+     * @param type $classe entity da persistere
+     */
+    protected function persist($entity) {
+        $this->getEm()->persist($entity);
+        $this->getEm()->flush();
+    }
+    
+    /**
+     * Restituisce il repository richiesto
+     * 
+     * @param type $classe entity da persistere
+     */
+    protected function remove($entity) {
+        $this->getEm()->remove($entity);
+        $this->getEm()->flush();
+    }
+    
     protected function getParam($name, $default = null) {
         $out = $this->getRequest()->get($name, null);
         if($out === null) {
