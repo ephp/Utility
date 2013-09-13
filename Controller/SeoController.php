@@ -25,7 +25,7 @@ class SeoController extends Controller {
      * @Template()
      */
     public function indexAction() {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getEm();
 
         $entities = $em->getRepository('EphpUtilityBundle:Seo\Seo')->findAll();
 
@@ -39,7 +39,7 @@ class SeoController extends Controller {
      * @Template()
      */
     public function showAction($id) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getEm();
 
         $entity = $em->getRepository('EphpUtilityBundle:Seo\Seo')->find($id);
 
@@ -62,7 +62,7 @@ class SeoController extends Controller {
      */
     public function allAction($id) {
         set_time_limit(3600);
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getEm();
         $entity = new Seo();
         $entity = $em->getRepository('EphpUtilityBundle:Seo\Seo')->find($id);
 
@@ -141,10 +141,11 @@ class SeoController extends Controller {
         $entity = new Seo();
         $request = $this->getRequest();
         $form = $this->createForm(new SeoType(), $entity);
-        $form->bindRequest($request);
+
+        $form->submit($request); //PIZZETTA @barno;
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getEm();
             $em->persist($entity);
             $em->flush();
 
@@ -164,7 +165,7 @@ class SeoController extends Controller {
      * @Template()
      */
     public function editAction($id) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getEm();
 
         $entity = $em->getRepository('EphpUtilityBundle:Seo\Seo')->find($id);
 
@@ -193,7 +194,7 @@ class SeoController extends Controller {
      * @Template("EphpUtilityBundle:Seo:edit.html.twig")
      */
     public function updateAction($id) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getEm();
 
         $entity = $em->getRepository('EphpUtilityBundle:Seo\Seo')->find($id);
 
@@ -235,7 +236,7 @@ class SeoController extends Controller {
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getEm();
             $entity = $em->getRepository('EphpUtilityBundle:Seo\Seo')->find($id);
 
             if (!$entity) {
