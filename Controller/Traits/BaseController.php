@@ -83,38 +83,6 @@ trait BaseController {
     }
 
     /**
-     * 
-     * @param string $name
-     * @param mixed $default
-     * @return mixed
-     * @throws \Exception
-     */
-    protected function getParam($name, $default = null) {
-        $out = $this->getRequest()->get($name, null);
-        if ($out === null) {
-            if ($default instanceof \Exception) {
-                throw $default;
-            }
-            $out = $default;
-        }
-        return $out;
-    }
-
-    protected function hasRole($role) {
-        $user = $this->getUser();
-        return $user->hasRole($role);
-    }
-
-    protected function inRole($roles) {
-        $user = $this->getUser();
-        $out = false;
-        foreach ($roles as $role) {
-            $out != $user->hasRole($role);
-        }
-        return $out;
-    }
-
-    /**
      * Fa il SELECT * da un repository o esegue una query
      * 
      * @param string $classe nome del repository
@@ -153,4 +121,40 @@ trait BaseController {
         return intval(array_shift($out));
     }
 
+    protected function hasRole($role) {
+        $user = $this->getUser();
+        return $user->hasRole($role);
+    }
+
+    protected function inRole($roles) {
+        $user = $this->getUser();
+        $out = false;
+        foreach ($roles as $role) {
+            $out != $user->hasRole($role);
+        }
+        return $out;
+    }
+
+    /**
+     * 
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function getParam($name, $default = null) {
+        $out = $this->getRequest()->get($name, null);
+        if ($out === null) {
+            if ($default instanceof \Exception) {
+                throw $default;
+            }
+            $out = $default;
+        }
+        return $out;
+    }
+
+    
+    protected function jsonResponse($output = array()) {
+        return new \Symfony\Component\HttpFoundation\Response(json_encode($output));
+    }
 }
