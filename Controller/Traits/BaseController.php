@@ -41,6 +41,17 @@ trait BaseController {
     }
 
     /**
+     * Fa il findAll da un repository
+     * 
+     * @param string $classe nome del repository
+     * @param array $find array con i criteri di ricerca
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected function findAll($classe) {
+        return $this->getRepository($classe)->findAll();
+    }
+
+    /**
      * Fa il findBy da un repository
      * 
      * @param string $classe nome del repository
