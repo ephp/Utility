@@ -15,7 +15,7 @@ trait CurlController {
         $out = curl_exec($ch);
 
         if ($out === false) {
-            throw new \Exception('Errore CURL POST');
+            throw new \Exception('Errore CURL POST in '.$url);
         }
 
         curl_close($ch);
@@ -33,7 +33,7 @@ trait CurlController {
         $out = curl_exec($ch);
 
         if ($out === false) {
-            throw new \Exception('Errore CURL GET');
+            throw new \Exception('Errore CURL GET in '.$url);
         }
 
         curl_close($ch);

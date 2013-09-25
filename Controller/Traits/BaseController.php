@@ -134,11 +134,17 @@ trait BaseController {
 
     protected function hasRole($role) {
         $user = $this->getUser();
+        if (!$user) {
+            return false;
+        }
         return $user->hasRole($role);
     }
 
     protected function inRole($roles) {
         $user = $this->getUser();
+        if (!$user) {
+            return false;
+        }
         $out = false;
         foreach ($roles as $role) {
             $out != $user->hasRole($role);
@@ -164,8 +170,8 @@ trait BaseController {
         return $out;
     }
 
-    
     protected function jsonResponse($output = array()) {
         return new \Symfony\Component\HttpFoundation\Response(json_encode($output));
     }
+
 }
