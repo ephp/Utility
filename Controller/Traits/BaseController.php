@@ -100,6 +100,42 @@ trait BaseController {
      * @param array $find array con i criteri di ricerca
      * @return Mixed
      */
+    protected function executeDql($classe, $find = array()) {
+        $repo = $this->getRepository($classe);
+        /* @var $repo \Doctrine\ORM\EntityRepository */
+        $qb = $repo->createQueryBuilder('c');
+        foreach ($find as $key => $value) {
+            $qb->andWhere("c.{$key} = :{$key}")
+                    ->setParameter($key, $value);
+        }
+        $out = $qb->getQuery()->execute();
+        return $out;
+    }
+
+    /**
+     * Fa il SELECT COUNT(*) usando una query SQL
+     * C'è il controllo che sia SELECT COUNT(*) FROM o scoppia
+     * 
+     * @param string $sql query sql
+     * @param array $params array con i criteri di ricerca
+     * @return Mixed
+     */
+    protected function executeSql($sql, $params = array()) {
+        $em = $this->getEm();
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $conn = $em->getConnection();
+        $stmt = $conn->executeQuery($sql, $params);
+        $out = $stmt->fetchAll();
+        return $out;
+    }
+
+    /**
+     * Fa il SELECT * da un repository o esegue una query
+     * 
+     * @param string $classe nome del repository
+     * @param array $find array con i criteri di ricerca
+     * @return Mixed
+     */
     protected function countDql($classe, $find = array()) {
         $repo = $this->getRepository($classe);
         /* @var $repo \Doctrine\ORM\EntityRepository */
