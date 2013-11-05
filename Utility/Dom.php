@@ -8,7 +8,7 @@ class Dom {
      *
      * @param \DOMElement $element
      * @param string $tag
-     * @return \BringOut\Bundle\GrabBundle\Controller\DOMElement
+     * @return \DOMElement
      */
     public static function getDOMBase(\DOMDocument $element, $tag = 'html') {
         return $element->getElementsByTagName($tag)->item(0);
@@ -19,7 +19,7 @@ class Dom {
      * @param \DOMElement $element
      * @param array $criteria
      * @param boolean $first
-     * @return \BringOut\Bundle\GrabBundle\Controller\DOMElement
+     * @return \DOMElement
      */
     public static function getDOMElement(\DOMElement $element, $criteria = array(), $first = true) {
         $out = $first ? false : array();

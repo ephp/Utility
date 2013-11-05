@@ -86,6 +86,10 @@ class String {
         return $frase;
     }
     
+    public static function strip_tags($txt) {
+        return str_replace(array('&nbsp;', '   ', '  ', "\n \n", "\n\n"), array(' ', ' ', ' ', "\n", "\n"), strip_tags(str_replace(array(' />', '<br/>', '</p>', '</div>', '>'), array('/>', "<br>\n", "</p>\n", "</div>\n", '> '), $txt)));
+    }
+    
     /**
      * Trasforma una stringa, una data in un codice di 8 caratteri
      * 

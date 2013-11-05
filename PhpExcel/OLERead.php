@@ -22,8 +22,8 @@ class OLERead {
             return false;
         }
         if (substr($this->data, 0, 8) != Utility::identifierOle()) {
-            \Ephp\UtilityBundle\Utility\Log::pr(substr($this->data, 0, 8), true);
-            \Ephp\UtilityBundle\Utility\Log::pr(Utility::identifierOle());
+            \Ephp\UtilityBundle\Utility\Debug::pr(substr($this->data, 0, 8), true);
+            \Ephp\UtilityBundle\Utility\Debug::pr(Utility::identifierOle());
             $this->error = 1;
             return false;
         }
