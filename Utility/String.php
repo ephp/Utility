@@ -87,7 +87,7 @@ class String {
     }
     
     public static function strip_tags($txt) {
-        return str_replace(array('&nbsp;', '   ', '  ', "\n \n", "\n\n"), array(' ', ' ', ' ', "\n", "\n"), strip_tags(str_replace(array(' />', '<br/>', '</p>', '</div>', '>'), array('/>', "<br>\n", "</p>\n", "</div>\n", '> '), $txt)));
+        return str_replace(array('&nbsp;', '   ', '  ', "\\n", "\n \n", "\n\n"), array(' ', ' ', ' ', "\n", "\n", "\n"), strip_tags(str_replace(array(' />', '<br/>', '<br>', '</p>', '</div>', '>'), array('/>', "<br/>\n", "<br/>\n", "</p>\n", "</div>\n", '> '), $txt)));
     }
     
     /**
