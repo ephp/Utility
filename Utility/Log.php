@@ -1,6 +1,7 @@
 <?php
 
 namespace Ephp\UtilityBundle\Utility;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class Log {
 

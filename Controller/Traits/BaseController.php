@@ -209,5 +209,14 @@ trait BaseController {
     protected function jsonResponse($output = array()) {
         return new \Symfony\Component\HttpFoundation\Response(json_encode($output));
     }
+    
+    protected function getQuery($unsets = array()) {
+        $query = array_merge($this->getRequest()->query->all(), $this->getRequest()->attributes->all());
+        unset($query['_route'], $query['_route_params'], $query['_template_streamable'], $query['_template_default_vars']);
+        foreach($unsets as $unset) {
+            unset($query[$unset]);
+        }
+        return $query;
+    }
 
 }
