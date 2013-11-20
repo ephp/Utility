@@ -113,7 +113,7 @@ trait BaseController {
     }
 
     /**
-     * Fa il SELECT COUNT(*) usando una query SQL
+     * Fa il SELECT usando una query SQL
      * C'è il controllo che sia SELECT COUNT(*) FROM o scoppia
      * 
      * @param string $sql query sql
@@ -124,8 +124,26 @@ trait BaseController {
         $em = $this->getEm();
         /* @var $em \Doctrine\ORM\EntityManager */
         $conn = $em->getConnection();
+        /* @var $conn \Doctrine\DBAL\Connection */
         $stmt = $conn->executeQuery($sql, $params);
         $out = $stmt->fetchAll();
+        return $out;
+    }
+
+    /**
+     * Fa il SELECT usando una query SQL
+     * C'è il controllo che sia SELECT COUNT(*) FROM o scoppia
+     * 
+     * @param string $sql query sql
+     * @param array $params array con i criteri di ricerca
+     * @return integer
+     */
+    protected function updateSql($sql, $params = array()) {
+        $em = $this->getEm();
+        /* @var $em \Doctrine\ORM\EntityManager */
+        $conn = $em->getConnection();
+        /* @var $conn \Doctrine\DBAL\Connection */
+        $out = $conn->executeUpdate($sql, $params);
         return $out;
     }
 
