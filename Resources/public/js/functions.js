@@ -26,7 +26,23 @@ function crossfade(classe, time, fade, index) {
     }, time);
 }
 
-function autoupdateDiv(classe, callback) {
+function autoupdateDiv(classe, button_label, callback) {
+    var label = {
+        save:   'Save',
+        saving: 'Saving',
+        saved:  'Saved'
+    };
+    if(button_label) {
+        if(button_label.save) {
+            label.save = button_label.save;
+        }
+        if(button_label.saving) {
+            label.saving = button_label.saving;
+        }
+        if(button_label.saved) {
+            label.saved = button_label.saved;
+        }
+    }
     var old = null;
     var btn = false;
     $('.' + classe)
@@ -41,7 +57,7 @@ function autoupdateDiv(classe, callback) {
                     }
                 } else {
                     if (!btn) {
-                        $(this).after('<button type="button" id="autoupdate-btn" class="btn">'+i18n('Save')+'</button>');
+                        $(this).after('<button type="button" id="autoupdate-btn" class="btn">'+i18n(label.save)+'</button>');
                         btn = true;
                     }
                 }
@@ -72,9 +88,9 @@ function autoupdateDiv(classe, callback) {
                         u = Routing.generate(r, rp);
                     }
                     if (u) {
-                        $('#autoupdate-btn').text(i18n('Saving'));
+                        $('#autoupdate-btn').text(i18n(label.saving));
                         $.post(u, p, function(data) {
-                            $('#autoupdate-btn').text(i18n('Saved'));
+                            $('#autoupdate-btn').text(i18n(label.saved));
                             $('#autoupdate-btn').fadeOut(function() {
                                 $('#autoupdate-btn').remove();
                                 if(callback) {
