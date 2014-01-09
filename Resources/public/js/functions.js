@@ -32,17 +32,23 @@ function autoupdateDiv(classe, button_label, callback) {
         saving: 'Saving',
         saved:  'Saved'
     };
+    console.log(label);
+    console.log(button_label);
     if(button_label) {
+        console.log(button_label.save);
         if(button_label.save) {
             label.save = button_label.save;
         }
+        console.log(button_label.saving);
         if(button_label.saving) {
             label.saving = button_label.saving;
         }
+        console.log(button_label.saved);
         if(button_label.saved) {
             label.saved = button_label.saved;
         }
     }
+    console.log(label);
     var old = null;
     var btn = false;
     $('.' + classe)
