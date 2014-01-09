@@ -26,7 +26,7 @@ function crossfade(classe, time, fade, index) {
     }, time);
 }
 
-function autoupdateDiv(classe) {
+function autoupdateDiv(classe, callback) {
     var old = null;
     var btn = false;
     $('.' + classe)
@@ -77,6 +77,9 @@ function autoupdateDiv(classe) {
                             $('#autoupdate-btn').text(i18n('Saved'));
                             $('#autoupdate-btn').fadeOut(function() {
                                 $('#autoupdate-btn').remove();
+                                if(callback) {
+                                    callback(data);
+                                }
                             });
                         });
                     } else {
@@ -98,3 +101,4 @@ function i18n(frase, dominio) {
         return frase;
     }
 }
+
