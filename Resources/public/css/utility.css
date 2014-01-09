@@ -1,4 +1,11 @@
 /*
+ * TRANSPARENT
+ */
+.wait, .todo:hover { 
+    opacity:0.4;
+    filter:alpha(opacity=40); /* For IE8 and earlier */
+}
+/*
  * DISPLAY
  */
 .no-display {
@@ -26,6 +33,10 @@
     padding: 0px !important;
 }
 
+.padding3 {
+    padding: 3px;
+}
+
 .padding5 {
     padding: 5px;
 }
@@ -48,6 +59,10 @@
 
 .padding30 {
     padding: 30px;
+}
+
+.padding3-i {
+    padding: 3px !important;
 }
 
 .padding5-i {
@@ -81,6 +96,10 @@
     margin: 0px !important;
 }
 
+.margin3 {
+    margin: 3px;
+}
+
 .margin5 {
     margin: 5px;
 }
@@ -105,6 +124,10 @@
     margin: 30px;
 }
 
+.margin3-i {
+    margin: 3px !important;
+}
+
 .margin5-i {
     margin: 5px !important;
 }
@@ -127,4 +150,44 @@
 
 .margin30-i {
     margin: 30px !important;
+}
+
+/*
+ * Tipografic
+ */
+div.typography-small {
+    line-height: 15px !important;
+    min-height: 45px;
+    max-height: 45px;
+    overflow-y: auto;
+}
+div.typography-small:focus {
+    line-height: 15px !important;
+    min-height: 45px;
+    max-height: 225px;
+    background-color: #FFFFFF;
+}
+div.typography-medium {
+    line-height: 15px !important;
+    min-height: 90px;
+    max-height: 90px;
+    overflow-y: auto;
+}
+div.typography-medium:focus {
+    line-height: 15px !important;
+    min-height: 90px;
+    max-height: 225px;
+    background-color: #FFFFFF;
+}
+div.typography-big {
+    line-height: 15px !important;
+    min-height: 150px;
+    max-height: 90px;
+    overflow-y: auto;
+}
+div.typography-big:focus {
+    line-height: 15px !important;
+    min-height: 150px;
+    max-height: 225px;
+    background-color: #FFFFFF;
 }
