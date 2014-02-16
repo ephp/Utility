@@ -10,12 +10,12 @@ trait CurlController {
         $this->curlHeader($ch, $header);
         $this->curlBase($ch);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
 
         $out = curl_exec($ch);
 
         if ($out === false) {
-            throw new \Exception('Errore CURL POST in '.$url);
+            throw new \Exception('Errore CURL POST in '.$url.': '.curl_error($ch));
         }
 
         curl_close($ch);
