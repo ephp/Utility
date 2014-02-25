@@ -21,7 +21,8 @@ class String {
     }
 
     public static function currency($euro, $migliaia = '.', $decimali = ',') {
-        return str_replace(array('€', $migliaia, $decimali, ' '), array('', '', '.', ''), $euro);
+        $out = str_replace(array('€', $migliaia, $decimali, ' '), array('', '', '.', ''), $euro);
+        return floatval($out); 
     }
 
     public static function tronca($testo, $lunghezza, $space = true) {
