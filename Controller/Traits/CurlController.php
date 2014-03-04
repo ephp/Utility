@@ -10,7 +10,11 @@ trait CurlController {
         $this->curlHeader($ch, $header);
         $this->curlBase($ch);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+        if(is_array($params)) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+        } else {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        }
 
         $out = curl_exec($ch);
 
