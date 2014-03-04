@@ -20,8 +20,13 @@ function crossfade(classe, time, fade, index) {
         if (next > max) {
             next = 1;
         }
-        $('#' + classe + '-' + index).slideToggle(fade);
-        $('#' + classe + '-' + next).slideToggle(fade);
+        if(fade == 1) {
+            $('#' + classe + '-' + index).hide();
+            $('#' + classe + '-' + next).show();
+        } else {
+            $('#' + classe + '-' + index).slideToggle(fade);
+            $('#' + classe + '-' + next).slideToggle(fade);
+        }
         index = next;
     }, time);
 }

@@ -2,7 +2,7 @@
 
 namespace Ephp\UtilityBundle\Controller\Traits;
 
-trait BaseController {
+trait LogController {
 
     /**
      * 
