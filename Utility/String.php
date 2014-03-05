@@ -118,7 +118,7 @@ class String {
         for($i = 0; $i < strlen($str); $i++) {
             $n += ord($str{$i}) * (1 + $i % 10);
         }
-        $n = dechex($str).'';
+        $n = dechex($n).'';
         return str_repeat('0', 8-strlen($n)).$n;
     }
 
