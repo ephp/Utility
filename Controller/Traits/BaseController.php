@@ -208,6 +208,24 @@ trait BaseController {
 
     /**
      * 
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function getRoute() {
+        return $this->getParam('_route');
+    }
+
+    /**
+     * 
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function getRouteParams() {
+        return $this->getParam('_route_params');
+    }
+
+    /**
+     * 
      * @param string $name
      * @param mixed $default
      * @return mixed
