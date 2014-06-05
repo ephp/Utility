@@ -60,6 +60,7 @@ function calcolaData(date, giorni) {
   var new_date = new Date(utc + giorni * giorno);
   return new_date;
 }
+
 function sanitizeCurrency(fields) {
     fields.forEach(function(field) {
         field.change(function() {
@@ -88,6 +89,67 @@ function sanitizeCurrency(fields) {
         });
     });
 }
+
+function desanitizeCurrencyFormat(fields, decimali) {
+    var regex = new RegExp('[^0-9\\'+decimali+']', 'g');
+    fields.forEach(function(field) {
+        console.log('desanitizza '+field.attr('id'), field.val(), field.val().replace(regex, '').replace(decimali, "."));
+        var value = field.val().replace(regex, '').replace(decimali, ".");
+        field.val(value);
+    });
+}
+
+function sanitizeCurrencyFormat(fields, decimali, migliaia) {
+    if(!decimali) {
+        decimali = ',';
+    }
+    if(!migliaia) {
+        migliaia = '.';
+    }
+    fields.forEach(function(field) {
+        field.each(function() {
+            _sanitizeCurrencyFormat($(this), decimali, migliaia);
+        });
+        field.change(function() {
+            _sanitizeCurrencyFormat($(this), decimali, migliaia);
+        });
+    });
+}
+
+function _sanitizeCurrencyFormat(field, decimali, migliaia) {
+    if (!field.val()) {
+        return;
+    }
+    var format = new RegExp('^[0-9]+('+decimali+'|'+migliaia+')[0-9]{1,2}$');
+    if(field.val().search(format) === 0) {
+        field.val(field.val().replace(migliaia, decimali));
+    }
+    var regex = new RegExp('[^0-9\\'+decimali+']', 'g');
+    value = field.val().replace(migliaia, "").remove(regex);
+    n = 0;
+    i = 0;
+    nc = 0;
+    value.chars(function(c) {
+        if (c === decimali) {
+            n++;
+        }
+        if (n === 2) {
+            i = nc;
+            n++;
+        }
+        nc++;
+    });
+    if (n > 1) {
+        value = value.substring(0, i);
+        value = Math.abs(parseFloat(value === '' || value === decimali ? 0 : value.replace(decimali, '.')));
+        field.val(value.toFixed(2));
+    } else {
+        value = Math.abs(parseFloat(value === '' || value === decimali ? 0 : value.replace(decimali, '.')));
+        field.val(value.toFixed(2));
+    }
+    field.val(parseFloat(field.val()).format(2, migliaia, decimali));
+}
+
 function sanitizeTelefono(fields) {
     fields.forEach(function(field) {
         field.change(function() {
