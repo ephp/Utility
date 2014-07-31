@@ -1,7 +1,7 @@
-Usare EphpUtilityBundle
+Usare JFUtilityBundle
 =======================
 
-EphpUtilityBundle è un contenitore di classi statiche per agevolare lo sviluppo:
+JFUtilityBundle è un contenitore di classi statiche per agevolare lo sviluppo:
 * _Array
 * _Debug
 * _Geo

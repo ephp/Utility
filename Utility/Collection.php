@@ -1,6 +1,6 @@
 <?php
 
-namespace Ephp\UtilityBundle\Utility;
+namespace JF\UtilityBundle\Utility;
 
 class Collection {
 

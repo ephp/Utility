@@ -1,6 +1,6 @@
 <?php
 
-namespace Ephp\UtilityBundle\Utility;
+namespace JF\UtilityBundle\Utility;
 
 class String {
 
@@ -22,7 +22,7 @@ class String {
 
     public static function currency($euro, $migliaia = '.', $decimali = ',') {
         $out = str_replace(array('€', $migliaia, $decimali, ' '), array('', '', '.', ''), $euro);
-        return floatval($out); 
+        return floatval($out);
     }
 
     public static function tronca($testo, $lunghezza, $space = true) {
@@ -30,11 +30,11 @@ class String {
         if (strlen($testo) <= $lunghezza) {
             return $testo;
         }
-        if($space) {
+        if ($space) {
             $len = strpos($testo, ' ', $lunghezza);
             return substr($testo, 0, $len) . '...';
         } else {
-            return substr($testo, 0, $lunghezza-3) . '...';
+            return substr($testo, 0, $lunghezza - 3) . '...';
         }
     }
 
@@ -75,10 +75,10 @@ class String {
 
     public static function normalizza($frase) {
         return strtolower(str_replace(
-                                array('`', "'A", "'E", "'I", "'O", "'U"), array('', 'a', 'e', 'i', 'o', 'u'), iconv("utf-8", "ascii//TRANSLIT", $frase)
-                        ));
+                        array('`', "'A", "'E", "'I", "'O", "'U"), array('', 'a', 'e', 'i', 'o', 'u'), iconv("utf-8", "ascii//TRANSLIT", $frase)
+        ));
     }
-    
+
     public static function ripulisci($frase) {
         $frase = str_replace(array('>', "\n", "\r"), array('> ', ' ', ' '), $frase);
         $frase = strip_tags($frase);
@@ -86,11 +86,30 @@ class String {
         $frase = self::normalizza($frase);
         return $frase;
     }
-    
+
     public static function strip_tags($txt) {
         return str_replace(array('&nbsp;', '   ', '  ', "\\n", "\n \n", "\n\n"), array(' ', ' ', ' ', "\n", "\n", "\n"), strip_tags(str_replace(array(' />', '<br/>', '<br>', '</p>', '</div>', '>'), array('/>', "<br/>\n", "<br/>\n", "</p>\n", "</div>\n", '> '), $txt)));
     }
-    
+
+    public static function rows2array($txt) {
+        if (is_array($txt)) {
+            return $txt;
+        }
+        $rows = explode("\n", $txt);
+        foreach ($rows as $i => $row) {
+            $rows[$i] = trim($row);
+        }
+        return $rows;
+    }
+
+    public static function array2rows($rows) {
+        if (is_string($rows)) {
+            return $rows;
+        }
+        $txt = implode("\n", $rows);
+        return $txt;
+    }
+
     /**
      * Trasforma una stringa, una data in un codice di 8 caratteri
      * 
@@ -98,28 +117,28 @@ class String {
      * @return string
      */
     public static function ep8($obj) {
-        if(is_array($obj)) {
+        if (is_array($obj)) {
             $out = array();
             foreach ($obj as $o) {
                 $out[] = self::ep8($o);
             }
             return implode('-', $out);
-        } else if($obj instanceof \DateTime) {
+        } else if ($obj instanceof \DateTime) {
             /* @var $obj \DateTime */
             $str = $obj->getTimestamp();
-        } else if($obj instanceof \Ephp\UtilityBundle\Interfaces\EP8) {
-            /* @var $obj \Ephp\UtilityBundle\Interfaces\EP8 */
+        } else if ($obj instanceof \JF\UtilityBundle\Interfaces\EP8) {
+            /* @var $obj \JF\UtilityBundle\Interfaces\EP8 */
             $str = $obj->ep8String();
         } else {
-            $str = 'ep8 '.$obj;
+            $str = 'ep8 ' . $obj;
         }
-        $str = md5($str).sha1($str);
+        $str = md5($str) . sha1($str);
         $n = 0;
-        for($i = 0; $i < strlen($str); $i++) {
+        for ($i = 0; $i < strlen($str); $i++) {
             $n += ord($str{$i}) * (1 + $i % 10);
         }
-        $n = dechex($n).'';
-        return str_repeat('0', 8-strlen($n)).$n;
+        $n = dechex($n) . '';
+        return str_repeat('0', 8 - strlen($n)) . $n;
     }
 
 }

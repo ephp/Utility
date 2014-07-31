@@ -1,16 +1,8 @@
 <?php
 
-namespace Ephp\UtilityBundle\Controller\Traits;
+namespace JF\UtilityBundle\Controller\Traits;
 
-trait LogController {
-
-    /**
-     * 
-     * @return \Symfony\Bundle\FrameworkBundle\Translation\Translator
-     */
-    protected function getTranslator() {
-        return $this->get('translator');
-    }
+trait ORMController {
 
     /**
      * @return \Doctrine\ORM\EntityManager 
@@ -71,6 +63,42 @@ trait LogController {
      */
     protected function findOneBy($classe, $find, $order = array()) {
         return $this->getRepository($classe)->findOneBy($find, $order);
+    }
+
+    /**
+     * Fa il getQbAll da un repository
+     * 
+     * @param string $classe nome del repository
+     * @param array $getQb array con i criteri di ricerca
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    protected function createQueryBuilder($classe) {
+        return $this->getRepository($classe)->createQueryBuilder('q');
+    }
+
+    /**
+     * Fa il getQbBy da un repository
+     * 
+     * @param string $classe nome del repository
+     * @param array $getQb array con i criteri di ricerca
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected function createQueryBuilderBy($classe, $find, $order = array(), $limit = null, $from = null) {
+        $qb = $this->getQbAll($classe);
+        foreach ($find as $field => $value) {
+            $qb->andWhere("q.{$field} = :{$field}")
+                    ->setParameter("{$field}", $value);
+        }
+        foreach ($order as $field => $mode) {
+            $qb->addOrderBy($field, $mode);
+        }
+        if($limit) {
+            $qb->setMaxResults($limit);
+        }
+        if($from) {
+            $qb->setFirstResult($from);
+        }
+        return $qb;
     }
 
     /**
@@ -184,57 +212,6 @@ trait LogController {
         $stmt = $conn->executeQuery($sql, $params);
         $out = $stmt->fetch();
         return intval(array_shift($out));
-    }
-
-    protected function hasRole($role) {
-        $user = $this->getUser();
-        if (!$user) {
-            return false;
-        }
-        return $user->hasRole($role);
-    }
-
-    protected function inRole($roles) {
-        $user = $this->getUser();
-        if (!$user) {
-            return false;
-        }
-        $out = false;
-        foreach ($roles as $role) {
-            $out != $user->hasRole($role);
-        }
-        return $out;
-    }
-
-    /**
-     * 
-     * @param string $name
-     * @param mixed $default
-     * @return mixed
-     * @throws \Exception
-     */
-    protected function getParam($name, $default = null) {
-        $out = $this->getRequest()->get($name, null);
-        if ($out === null) {
-            if ($default instanceof \Exception) {
-                throw $default;
-            }
-            $out = $default;
-        }
-        return $out;
-    }
-
-    protected function jsonResponse($output = array()) {
-        return new \Symfony\Component\HttpFoundation\Response(json_encode($output));
-    }
-    
-    protected function getQuery($unsets = array()) {
-        $query = array_merge($this->getRequest()->query->all(), $this->getRequest()->attributes->all());
-        unset($query['_route'], $query['_route_params'], $query['_template_streamable'], $query['_template_default_vars']);
-        foreach($unsets as $unset) {
-            unset($query[$unset]);
-        }
-        return $query;
     }
 
 }

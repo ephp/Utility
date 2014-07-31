@@ -1,6 +1,6 @@
 <?php
 
-namespace Ephp\UtilityBundle\Interfaces;
+namespace JF\UtilityBundle\Interfaces;
 
 /**
  *

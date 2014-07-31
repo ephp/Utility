@@ -1,6 +1,6 @@
 <?php
 
-namespace Ephp\UtilityBundle\Controller\Traits;
+namespace JF\UtilityBundle\Controller\Traits;
 
 trait CurlController {
 

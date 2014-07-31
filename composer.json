@@ -1,9 +1,8 @@
 {
-    "name": "ephp/utility",
-    "type": "symfony-bundle",
+    "name": "ephpjfsymfony-bundle",
     "description": "Bundle con funzioni di utilità varie",
     "keywords": ["debug", "array", "geo", "log", "time", "string", "ephp", "symfony-2.1"],
-    "homepage": "https://github.com/ephp/Utility",
+    "homepage": "https://github.com/jf/Utility",
     "license": "MIT",
     "authors": [
             {
@@ -15,8 +14,8 @@
             "php": ">=5.4"
     },
     "autoload": {
-            "psr-0": { "Ephp\\UtilityBundle": "" }
+            "psr-0": { "JF\\UtilityBundle": "" }
     },
-    "target-dir": "Ephp/UtilityBundle",
+    "target-dir": "JF/UtilityBundle",
     "minimum-stability": "dev"
 }

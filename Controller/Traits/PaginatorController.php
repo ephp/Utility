@@ -1,6 +1,6 @@
 <?php
 
-namespace Ephp\UtilityBundle\Controller\Traits;
+namespace JF\UtilityBundle\Controller\Traits;
 
 trait PaginatorController {
 
@@ -9,7 +9,11 @@ trait PaginatorController {
      * @return \Knp\Component\Pager\Paginator
      */
     protected function getPaginator() {
-        return $this->get('knp_paginator');
+        try { 
+            return $this->get('knp_paginator');
+        } catch (\Exception $e) {
+            throw new \Exception('Please add "knplabs/knp-paginator-bundle": "dev-master" on your composer.json');
+        }
     }
 
     /**
